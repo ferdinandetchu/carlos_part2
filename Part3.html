@@ -181,20 +181,40 @@
     			population: "5,758,736"
     		},
     	];
-    	function getInformation() {
+    	async function getInformation() {
 			  // Declare variables
 			  let inputForm = document.forms["myForm"]["state"].value.toUpperCase()
 			  let textArea = document.getElementById('result');
+			  let result = null;
 			  // Loop through all list items
-			  for (i = 0; i < stateInformation.length; i++) {
-			    if (stateInformation[i].stateAbbr.toUpperCase().indexOf(inputForm) > -1) {
-			    	textArea.innerHTML = "State abbr = " + stateInformation[i].stateAbbr + "<br>" + "State Name = " + stateInformation[i].stateName + "<br>" + "Capital = " + stateInformation[i].capital + "<br>" + "Population = " + stateInformation[i].population;
-			    	console.log(stateInformation[i])
-			      // li[i].style.display = "";
-			    } else {
-			      // textArea.innerHTML = "the database does not have information about this state, we only have information about AL, AK, AZ, AR, CA, and CO"
-			      console.log(stateInformation[i])
-			    }
+			  if(inputForm != "") {
+			  	let inputSplit = inputForm.split("")
+			  	if (inputSplit.length == 2) {
+			  		let state = stateInformation.filter((x) => x.stateAbbr == inputForm)
+				  	if (state.length == 1) {
+				  		textArea.innerHTML = "Thanks for your inquiry, here is the information you requested: " + "<br>" + "<br>" + "State abbr = " + state[0].stateAbbr + "<br>" + "State Name = " + state[0].stateName + "<br>" + "Capital = " + state[0].capital + "<br>" + "Population = " + state[0].population;
+				  		textArea.style.color = "black"
+				  	}else{
+				  		textArea.innerHTML = "The database does not have information about this state, we only have information about AL, AK, AZ, AR, CA, and CO";
+				  		textArea.style.color = "red"
+				  	}
+			  	}else {
+			  		console.log(inputSplit)
+			  		let state = stateInformation.filter((x) => x.stateName.toUpperCase() == inputForm)
+			  		console.log(state)
+				  	if (state.length == 1) {
+				  		textArea.innerHTML ="Thanks for your inquiry, here is the information you requested: " + "<br>" + "<br>" + "State abbr = " + state[0].stateAbbr + "<br>" + "State Name = " + state[0].stateName + "<br>" + "Capital = " + state[0].capital + "<br>" + "Population = " + state[0].population;
+				  		textArea.style.color = "black"
+				  	}else{
+				  		textArea.innerHTML = "The database does not have information about this state, we only have information about AL, AK, AZ, AR, CA, and CO";
+				  		textArea.style.color = "red"
+				  	}
+			  	}
+			  	
+			  	
+			  }else {
+			  	textArea.innerHTML = "Input State";
+			  	textArea.style.color = "red"
 			  }
 			}
     </script>
@@ -208,11 +228,10 @@
       <p style="display: none;" id="email_val_text">the database does not have information about this state, we only have information about AL, AK, AZ, AR, CA, and CO</p>
       <hr>
       <h3 id="result"></h3>
+      <h3 style="display: none;" id="notFound">
+      	the database does not have information about this state, we only have information about AL, AK, AZ, AR, CA, and CO
+      </h3>
       <hr>
-      <div class="btn-block">
-        <h6>By clicking Register, you agree on our Privacy Policy</h6>
-        
-      </div>
     </form>
     <button onclick="getInformation()">State Info</button>
   </div>
