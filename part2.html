@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Part2</title>
+	<style>
+    html, body {
+    	display: flex;
+    	justify-content: center;
+   	 	height: 100%;
+   	 	background: forestgreen;
+    }
+    body, div, h1, form, input, p { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #666;
+    }
+    h1 {
+      padding: 10px 0;
+      font-size: 32px;
+      font-weight: 300;
+      text-align: center;
+    }
+    p {
+      font-size: 12px;
+    }
+    hr {
+      color: #a9a9a9;
+      opacity: 0.3;
+    }
+    .main-block {
+      max-width: 440px; 
+      min-height: 460px; 
+      padding: 10px 0;
+      margin: auto;
+      border-radius: 5px; 
+      border: solid 1px #ccc;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+      background: #ebebeb; 
+      z-index: 2;
+    }
+    form {
+      margin: 0 30px;
+    }
+    .account-type, .gender {
+      margin: 15px 0;
+    }
+    input[type=radio] {
+      display: none;
+    }
+    label#icon {
+      margin: 0;
+      border-radius: 5px 0 0 5px;
+    }
+    input[type=text], input[type=password] {
+      width: calc(100% - 57px);
+      height: 36px;
+      margin: 13px 0 0 -5px;
+      padding-left: 10px; 
+      border-radius: 0 5px 5px 0;
+      border: solid 1px #cbc9c9; 
+      box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+      background: #fff; 
+    }
+    textarea {
+      width: calc(100% - 57px);
+      height: 150px;
+      margin: 13px 0 0 -5px;
+      padding-left: 10px; 
+      border-radius: 0 5px 5px 0;
+      border: solid 1px #cbc9c9; 
+      box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+      background: #fff; 
+    }
+    input[type=password] {
+      margin-bottom: 15px;
+    }
+    #icon {
+      display: inline-block;
+      padding: 9.3px 15px;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+      background: #1c87c9;
+      color: #fff;
+      text-align: center;
+    }
+    .btn-block {
+      margin-top: 10px;
+      text-align: center;
+    }
+    button {
+      width: 100%;
+      padding: 10px 0;
+      margin: 10px auto;
+      border-radius: 5px; 
+      border: none;
+      background: #1c87c9; 
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+    button:hover {
+      background: #26a9e0;
+    }
+    p {
+      /*color: red;*/
+    }
+    .overlay-color {
+			position: absolute;
+			width: 100vw;
+			height: 100vh;
+			top: 0px;
+			left: 0px;
+			background-color: rgba(0, 0, 0, 0.8);
+			z-index: 1;
+		}
+  </style>
+  <script>
+  	function search() {
+      var count=0;
+        
+      var key=document.forms['myForm']["searchCharacter"].value.toLowerCase().charAt( 0 );
+      var key=key.toLowerCase();
+
+      var stringToSearch=document.forms['myForm']["input"].value.toLowerCase();
+      var stringToSearch=stringToSearch.toLowerCase(); 
+      if (key.length != 0 && stringToSearch.length != 0) {
+        document.getElementById('errMessage1').style.display = "none";
+        document.getElementById('errMessage').style.display = "none";
+        for (i=0; i < stringToSearch.length; i++) {
+          if (stringToSearch.charAt(i) == key) {
+            count++;     
+          }
+        }         
+        if ( count == 0 ) {
+          let errorWindows = window.open('', "_black", "width=300,height=100");
+          errorWindows.document.write("<p>" + "Search character " + "<span style='color: red;'>" + key + "</span>" + " not found in text string!" + "</p>");
+          location.reload();
+        }else {
+          document.getElementById("output").value=count + " occurrence(s) of " + key + " found";
+        }
+      }else if (key.length != 0 && stringToSearch.length == 0) {
+        document.getElementById('errMessage1').style.display = "block";
+        document.getElementById('errMessage').style.display = "none";
+      }else if (key.length == 0 && stringToSearch.length != 0) {
+        document.getElementById('errMessage').style.display = "block";
+        document.getElementById('errMessage1').style.display = "none";
+      }else {
+        document.getElementById('errMessage1').style.display = "block";
+        document.getElementById('errMessage').style.display = "block";
+      }
+    }
+  </script>
+</head>
+<body onload="document.getElementById('searchChar').focus();">
+	<div class="overlay-color">
+	</div>
+	<a style="z-index: 2; width: 100px;" href="./cnit-homework.html"><button>Home</button></a>
+	<div class="main-block">
+    <h1>Part2</h1>
+    <form name="myForm">
+      <hr>
+      <p style="color: forestgreen;">Number of occurrences</p>
+      <textarea id="output" disabled></textarea>
+      <hr>
+      <label for="userNumber">Enter a search character</label>
+      <input type="text" name="searchCharacter" id="searchChar" size="4" placeholder="Search Character eg a"/>
+      <p style="display: none; color: red;" id="errMessage">Search Character required</p>
+      <br>
+      <br>
+      <label for="seachText">Enter search text</label>
+      <textarea placeholder="Write Text here" name="searchText" id="input"></textarea>
+      <!-- <p style="display: none;" id="number_val_text">Enter a floating-point number with AT LEAST 4 decimal positions (no less than that)</p> -->
+      <p style="display: none; color: red;" id="errMessage1">Seach Text is required</p>
+      <hr>
+      <h3 id="result"></h3>
+      <hr>
+    </form>
+    <button onclick="search()">Search</button>
+  </div>
+</body>
+</html>
