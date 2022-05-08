@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Part1</title>
+	<title>Part3</title>
 	<style>
     html, body {
     	display: flex;
@@ -154,70 +154,64 @@
 		}
   </style>
   <script>
-  	
-  	function runCalculations() {
-  		// Declare variables
-  		let userInput = parseFloat(document.forms["myForm"]["userNumber"].value);
-  		let errorMessage = document.getElementById('errMessage');
-  		let textInput = userInput.toString().split('');
-  		let textArea = document.getElementById('result');
-  		let originalRouded = Math.round(userInput);
-  		let squareRoot = Math.round(Math.sqrt(userInput));
-  		let rounToNearestTen = Math.floor(userInput / 10) * 10;
-  		let rounToNearestHunderdths = Math.round(userInput / 100) * 100;
-  		let rounToNearestThousandths = Math.round(userInput / 1000) * 1000;
-  		// make sure user did not submit empty form
-  		console.log(userInput)
-  		if(userInput.toFixed() != "NaN") {
-  			let isDecimal = textInput.indexOf('.')
-  			console.log(isDecimal)
-  			// esure the numer is decimal
-  			if (isDecimal != -1) {
-  				// ensure userinput has 4 decimal places
-  				if ((textInput.indexOf(".") + 4) < textInput.length) {
-  					// make sure error message is not showing
-  					errorMessage.style.display = "none"
-  					console.log(userInput)
-  					console.log(originalRouded)
-  					textArea.innerHTML = "Your Input: " + userInput +"<br>" + "Rounded to Nearest Integer: " + originalRouded + "<br>" + 
-  					"Square root: " + squareRoot + "<br>" + "Nearest Tenths: " + rounToNearestTen + "<br>" + "Nearest Hunderdths: " + rounToNearestHunderdths + "<br>" + "Nearest Thousandths: " + rounToNearestThousandths;
+    // $(":input").inputmask();
+    // $("#phone").inputmask({"mask": "(999) 999-9999"});
+    function formatPhoneNumber(event, element) {
+      if (isNaN(event.key) && !isAllowedKey(event)) {
+        event.preventDefault();
+      } else {
+        element.value = element.value.replace(/\W/gi, '').replace(/^(.{3})(.{3})(.{4})$/, "($1) $2-$3");
+        if (element.value.length == 14) {
+          let areaCod = element.value.split(' ', 1);
+          document.getElementById('result').style.display = "block"
+          document.getElementById('errMessage').style.display = "none"
+          document.forms['myForm']['areacode'].value = areaCod[0].slice(1, 4);
+          document.forms['myForm']['first'].value = element.value.slice(6, 9);
+          document.forms['myForm']['last'].value = element.value.slice(10);
+          // console.log(areaCod[0].slice(1, 4), element.value.length)
+        }else {
+          document.getElementById('result').style.display = "none"
+          document.getElementById('errMessage').style.display = "block"
+        }
+      }   
+    }
 
-  				}else {
-  					errorMessage.innerHTML = "Enter a floating-point number with AT LEAST 4 decimal positions (no less than that)";
-			  		errorMessage.style.color = "red"
-			  		errorMessage.style.display = "block"
-  				}
-  			}else {
-  				errorMessage.innerHTML = "Number must be decimal";
-			  	errorMessage.style.color = "red"
-			  	errorMessage.style.display = "block"
-  			}
-  			// console.log(isDecimal)
-  		}else {
-  			userInput = null;
-  			errorMessage.innerHTML = "Floating Number is required";
-			  errorMessage.style.color = "red"
-			  errorMessage.style.display = "block"
-  		}
-  	}
+    function isAllowedKey(event) {
+      var allowed = false;
+      if (event.keyCode === 8 || event.keyCode === 9 || event.keyCode === 37 || event.keyCode === 39) {
+        allowed = true;
+      }
+      return allowed;
+    }
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 </head>
 <body>
 	<div class="overlay-color">
 	</div>
 	<a style="z-index: 2; width: 100px;" href="./cnit-homework.html"><button>Home</button></a>
 	<div class="main-block">
-    <h1>Part1</h1>
+    <h1>Part3</h1>
     <form name="myForm">
-      <label for="userNumber">Enter a floating-point number</label>
-      <input type="number" name="userNumber" id="userNumber" onkeyup="runCalculations()" placeholder="1.0000" />
-      <!-- <p style="display: none;" id="number_val_text">Enter a floating-point number with AT LEAST 4 decimal positions (no less than that)</p> -->
-      <p id="errMessage"></p>
+      <div id="result" style="display: none;">
+        <input id="areacode" type="text" disabled style="width: 40px;">
+        <input id="first" type="text" disabled style="width: 40px;">
+        <input id="last" type="text" disabled style="width: 40px;">
+      </div>
       <hr>
-      <h3 id="result"></h3>
+      <label for="phone">Enter Phone Number</label>
+      <input type="text" name="phone" id="phone" placeholder="(000) 000-0000" onkeypress="formatPhoneNumber(event, this);" type="text" maxlength="12" onkeyup="formatPhoneNumber(event, this)">
+      <!-- <p style="display: none;" id="number_val_text">Enter a floating-point number with AT LEAST 4 decimal positions (no less than that)</p> -->
+      <p id="errMessage" style="display: none; color: red;">Phone Number must be 10 numbers</p>
+      
       <hr>
     </form>
-    <button onclick="runCalculations()">Calculate</button>
+    <!-- <button onclick="phonenumber(document.forms['myForm']['phone']).value">Validate</button> -->
+    <div class="form-group">
+<span class="placeholder-text" style="display: none;">Please enter Card Number</span>
+<input name="cardNoSafe" id="cardNoSafe" value="" style="display:none;">
+</div>
   </div>
 </body>
 </html>
