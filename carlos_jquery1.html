@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Carlos JQuery 2</title>
+		<style>
+			.toolbar {
+				background-color: #0a224c;
+				color: white;
+				box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+				position: fixed;
+				width: 90%;
+				padding: 0px !important;
+			}
+			.nav-flex-row {
+				padding: 12px;
+				background-color: rgba(0, 0, 0, 0.6);
+				margin-right: 2px;
+				margin-left: 2px;
+			}
+			body {
+				margin-top: 0px;
+				margin-right: 5%;
+				margin-left: 5%;
+				color: white;
+				/*font-weight: bold;*/
+			}
+			.black-text {
+				color: black;
+			}
+			a {
+				color: green;
+			}
+			.flex-body {
+				display: flex;
+	  		flex-wrap: wrap;
+				justify-content: center;
+			}
+			.table-card {
+				width: 18%;
+				border: 1px solid gray;
+				padding-right: 12px;
+				padding-left: 12px;
+			}
+			.c-flex-row {
+				box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+				width: 25%;
+				margin: 1%;
+				padding: 2%;
+				height: 350px;
+				border-radius: 5px;
+			}
+			.fomart-card{
+				box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+				height: 100vh;
+				width: 25%;
+				padding: 2%;
+			}
+			.body-ingormation {
+				padding-top: 50px;
+			}
+			.main-body {
+				width: 65%;
+			}
+			.cover-picture {
+				background-image: url('https://www.w3schools.com/w3images/hamburger.jpg');
+				width: 100%;
+				height: 65vh;
+			}
+			.colored-head {
+				background: #0a224c; 
+				padding: 10px;
+				/*font-weight: bold;*/
+			}
+
+			.dropdown {
+			  position: relative;
+			  display: inline-block;
+			}
+			.dropdown-content {
+			  display: none;
+			  position: absolute;
+			  background-color: #f1f1f1;
+			  min-width: 160px;
+			  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			  z-index: 1;
+			}
+
+			.dropdown-content a {
+			  color: black;
+			  padding: 12px 16px;
+			  text-decoration: none;
+			  display: block;
+			}
+
+			.dropdown-content a:hover {background-color: #ddd;}
+
+			.dropdown:hover .dropdown-content {display: block;}
+
+			.dropdown:hover .dropbtn {background-color: #3e8e41;}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script> 
+			function createNavigation() {
+				$(function(){
+					$('.toolbar').html(function(i, origText){
+						// console.log(origText)
+						// add home work links to the href that lead to the pages
+    				return "<div class='dropdown nav-flex-row'><span>Homework 1</span><div class='dropdown-content'> <a href='#'>Part 1</a> <a href='#'>Part 2</a> <a href='#'>Part 3</a> </div> </div>" + 
+    				"<div class='dropdown nav-flex-row'><span>Homework 2</span><div class='dropdown-content'> <a href='#'>Part 1</a> <a href='#'>Link 2</a> <a href='#'>Part 3</a> </div> </div>" + 
+    				"<div class='dropdown nav-flex-row'><span>Homework 3</span><div class='dropdown-content'> <a href='#'>Part 1</a> <a href='#'>Part 2</a> <a href='#'>Part 3</a> </div> </div>" +
+    				"<div class='dropdown nav-flex-row'><span>Homework 4</span><div class='dropdown-content'> <a href='#'>Part 1</a> <a href='#'>Part 2</a> <a href='#'>Part 3</a> </div> </div>"; 
+    			});
+					console.log("am running")
+				})
+			};
+			function changeFont (val) {
+				if (val.name == "fontIn" ) {
+					$("document").ready(function(){
+							$("body").css({"font-family": `${val.value.toString()}`});
+							// console.log(val.value);
+					})
+				}else if (val.name == "fontStyleIn" ) {
+					$("body").css({"font-style": `${val.value.toString()}`});
+					// console.log(val.value);
+				}else if (val.name == "fontWeightIn" ) {
+					$("body").css({"font-weight": `${val.value}`});
+					// console.log(val.value);
+				}
+			};
+			function changeTextWhite() {
+				$("document").ready(function(){
+						$("body").css({"color": `rgb(255, 255, 255)`});
+						$(".black-text").css({"color": `rgb(255, 255, 255)`});
+					})
+			};
+			function changeTextDefualt () {
+				$("document").ready(function(){
+					$("body").css({"color": `rgb(255, 255, 255)`});
+					$(".black-text").css({"color": `rgb(0, 0, 0)`});
+				})
+			};
+			function changeColor (val) {
+				// console.log(val.value)
+				if (val.name == "bgRedIn" ) {
+					$("document").ready(function(){
+						$("#bgRedVal").text(val.value);
+						$("body").css({"background-color": `rgb(${val.value}, 0, 0)`});
+					})
+				}else if (val.name == "bgGreenIn") {
+					$("document").ready(function(){
+						$("#bgGreenVal").text(val.value);
+						$("body").css({"background-color": `rgb(0, ${val.value}, 0)`});
+					})
+				}else if (val.name == "bgBlueIn") {
+					$("document").ready(function(){
+						$("#bgBlueVal").text(val.value);
+						$("body").css({"background-color": `rgb(0, 0, ${val.value}`});
+					})
+				}else if (val.name == "hdRedIn") {
+					$("document").ready(function(){
+						$("#hdRedVal").text(val.value)
+						$(".colored-head").css({"background-color": `rgb(${val.value}, 0, 0)`});
+					})
+				}else if (val.name == "hdGreenIn") {
+					$("document").ready(function(){
+						$("#hdGreenVal").text(val.value)
+						$(".colored-head").css({"background-color": `rgb(0, ${val.value}, 0)`});
+					})
+				}else if (val.name == "hdBlueIn") {
+					$("document").ready(function(){
+						$("#hdBlueVal").text(val.value)
+						$(".colored-head").css({"background-color": `rgb(0, 0, ${val.value}`});
+					})
+				}else if (val.name == "txtRedIn") {
+					$("document").ready(function(){
+						$("#txtRedVal").text(val.value)
+						$("body").css({"color": `rgb(${val.value}, 0, 0)`});
+						$(".black-text").css({"color": `rgb(${val.value}, 0, 0)`});
+					})
+				}else if (val.name == "txtGreenIn") {
+					$("document").ready(function(){
+						$("#txtGreenVal").text(val.value)
+						$("body").css({"color": `rgb(0, ${val.value}, 0)`});
+						$(".black-text").css({"color": `rgb(0, ${val.value}, 0)`});
+					})
+				}else if (val.name == "txtBlueIn") {
+					$("document").ready(function(){
+						$("#txtBlueVal").text(val.value)
+						$("body").css({"color": `rgb(0, 0, ${val.value}`});
+						$(".black-text").css({"color": `rgb(0, 0, ${val.value}`});
+					})
+				}
+			};
+			
+		</script>
+	</head>
+	<body onload="createNavigation()">
+		<nav class="flex-body toolbar colored-head">
+		</nav>
+		<div class="body-ingormation flex-body">
+			<nav class="flex-row fomart-card">
+				<div class="colored-head">
+					<h3 style="margin: 0px;">
+						Fomart The Page
+					</h3>
+				</div>
+				<form name="backgroundInput" class="black-text">
+					<h4>Background Color</h4>
+					<label for="red">Red</label>
+					<input value="0" type="range" name="bgRedIn" min="0" max="255" onchange="changeColor(this)" oninput="changeColor(this)"><span id="bgRedVal"></span><br>
+					<label for="green">Green</label>
+					<input value="0" type="range" name="bgGreenIn" min="0" max="255" onchange="changeColor(this)" oninput="changeColor(this)"><span id="bgGreenVal"></span><br>
+					<label for="blue">Blue</label>
+					<input value="0" type="range" name="bgBlueIn" min="0" max="255" onchange="changeColor(this)" oninput="changeColor(this)"><span id="bgBlueVal"></span><br>
+				</form>
+				<form name="backgroundInput" class="black-text">
+					<h4>Header Color</h4>
+					<label for="red">Red</label>
+					<input value="0" type="range" name="hdRedIn" min="0" max="255" onchange="changeColor(this)" oninput="changeColor(this)"><span id="hdRedVal"></span><br>
+					<label for="green">Green</label>
+					<input value="0" type="range" name="hdGreenIn" min="0" max="255" onchange="changeColor(this)" oninput="changeColor(this)"><span id="hdGreenVal"></span><br>
+					<label for="blue">Blue</label>
+					<input value="0" type="range" name="hdBlueIn" min="0" max="255" onchange="changeColor(this)" oninput="changeColor(this)"><span id="hdBlueVal"></span><br>
+				</form>
+				<form name="textColorInput" class="black-text">
+					<h4>Text Color</h4>
+					<label for="red">Red</label>
+					<input value="0" type="range" name="txtRedIn" min="0" max="255" onchange="changeColor(this)" oninput="changeColor(this)"><span id="txtRedVal"></span><br>
+					<label for="green">Green</label>
+					<input value="0" type="range" name="txtGreenIn" min="0" max="255" onchange="changeColor(this)" oninput="changeColor(this)"><span id="txtGreenVal"></span><br>
+					<label for="blue">Blue</label>
+					<input value="0" type="range" name="txtBlueIn" min="0" max="255" onchange="changeColor(this)" oninput="changeColor(this)"><span id="txtBlueVal"></span> <input onclick="changeTextWhite()" type="button" name="" value="White Text"> <input onclick="changeTextDefualt()" type="button" name="" value="Defualt Text"><br>
+					<h4>Fonts</h4>
+					<label for="fontIn">Choose A Font:</label>
+					<select name="fontIn" onchange="changeFont(this)">
+					  <option value="serif">Serif</option>
+					  <option value="sans-serif">Sans Serif</option>
+					</select><br>
+					<label for="fontStyleIn">Choose A Font Style:</label>
+					<select name="fontStyleIn" onchange="changeFont(this)">
+					  <option value="oblique">Oblique</option>
+					  <option value="italic">Italic</option>
+					  <option value="normal">Normal</option>
+					</select><br>
+					<label for="fontWeightIn">Choose A Font Weight:</label>
+					<select name="fontWeightIn" onchange="changeFont(this)">
+					  <option value="normal">Normal</option>
+					  <option value="bold">Bold</option>
+					</select>
+				</form>
+				<button onclick="window.location.reload()" style="margin: 10px;">Restore Defualt</button>
+			</nav>
+			<div class="main-body flex-body">
+				<div class="cover-picture flex-body">
+					<!-- Cover picture -->
+				</div>
+				<div class="c-flex-row">
+					<div class="colored-head">
+						<h3 style="margin: 0px;">
+							Card 1
+						</h3>
+					</div>
+				</div>
+				<div class="c-flex-row">
+					<div class="colored-head">
+						<h3 style="margin: 0px;">
+							Card 2
+						</h3>
+					</div>
+				</div>
+				<div class="c-flex-row">
+					<div class="colored-head">
+						<h3 style="margin: 0px;">
+							Card 3
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
