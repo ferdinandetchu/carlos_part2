@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Carlos JQuery 1</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		function showHint(str) {
+	  if (str.length == 0) {
+	  	$(function(){
+	  		$('#txtHint').text("")
+	  		// console.log ($('#txtHint').text())
+			});
+	    return;
+	  } else {
+	    var xmlhttp = new XMLHttpRequest();
+	    xmlhttp.onreadystatechange = function() {
+	      if (this.readyState == 4 && this.status == 200) {
+	        document.getElementById("txtHint").innerHTML = this.responseText;
+	      }
+	    };
+	    
+	    xmlhttp.open("GET", "http://localhost/carlos_php/gethint.php?q=" + str, true);
+	    // xmlhttp.setRequestHeader( 'Access-Control-Allow-Origin', '*',);
+	    xmlhttp.send();
+	  }
+	}
+	</script>
+	<style>
+		body {
+			margin: 100px;
+		}
+		a {
+			color: green;
+		}
+		.flex-body {
+			display: flex;
+  		flex-wrap: wrap;
+			justify-content: center;
+		}
+		.table-card {
+			width: 18%;
+			border: 1px solid gray;
+			padding-right: 12px;
+			padding-left: 12px;
+		}
+	</style>
+</head>
+<body>
+	<p><b>Start typing a name in the input field below:</b></p>
+	<form action="">
+	  <label for="fname">First name:</label>
+	  <input type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
+	</form>
+	<p>Suggestions: <span id="txtHint"></span></p>
+	<div class="api-body">
+		<div style="background-color: #0a224c;" class="flex-body">
+			<h1 style="color: white;">Food API Proposal</h1>
+		</div>
+		<div class="flex-body">
+			<div>
+				<p>Comapny Name: xxxxxxx</p>
+				<p>Company Email: xxxxxx</p>
+				<p>Company Phone Number: xxxxx</p>
+				<p>Company Address: xxxxxxx</p>
+			</div>
+		</div>
+		<div class="flex-body">
+			<div style="background-color: #0a224c; padding-right: 12px; padding-left: 12px; color: white;">
+				<h3>INTRUDUCTION <span style="font-weight: normal;">(COVER LETTER)</span></h3>
+			</div>
+		</div>
+		<div class="flex-body">
+			<div style="max-width: 700px;">
+				<p>Dear xxxxx xxx</p>
+				<p>
+					Thank you for the time on checking my API proposal.<br>
+					On researching, I found out that if we give more functionalities to our food delivery app we will have more screen time on the app and thus drive more sales and opportunities for advertisement in our app. So I then thought, we can add things like getting food recipes on our app and healthy menus on our app. On researching, I found the <a href="https://spoonacular.com/food-api" target="_blanck">food API</a> that thus a lot which will be explained below.
+					<br>
+					<address>
+						Sincerely,<br>
+						Carlos B<br>
+						Software Developer<br>
+						xxxxxxxxxx Company<br>
+					</address>
+				</p>
+			</div>
+		</div>
+		<div class="flex-body">
+			<div style="background-color: #0a224c; padding-right: 12px; padding-left: 12px; color: white;">
+				<h3>API INFORMATION <span style="font-weight: normal;">(DETAILS)</span></h3>
+			</div>
+		</div>
+		<div class="flex-body">
+			<!-- table headings -->
+			<div class="table-card">
+				<h4>
+					Respost File Type (JSON, XML, etc)
+				</h4>
+			</div>
+			<div class="table-card">
+				<h4>
+					Required Key
+				</h4>
+			</div>
+			<div class="table-card">
+				<h4>
+					Fees Payment
+				</h4>
+			</div>
+			<div class="table-card">
+				<h4>
+					Fees Charging Plan
+				</h4>
+			</div>
+			<div class="table-card">
+				<h4>
+					Link to API documentation
+				</h4>
+			</div>
+			<!-- Table data -->
+			<div class="table-card">
+				<p>
+					XML
+				</p>
+			</div>
+			<div class="table-card">
+				<p>
+					Not Needed
+				</p>
+			</div>
+			<div class="table-card">
+				<p>
+					Free
+				</p>
+			</div>
+			<div class="table-card">
+				<p>
+					/
+				</p>
+			</div>
+			<div class="table-card">
+				<p>
+					<a href="https://spoonacular.com/food-api/docs" target="_blanck">Food API</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
